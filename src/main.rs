@@ -133,8 +133,9 @@ fn main() {
     let tree = Tree::new("/", "/");
     let tree_ref:Rc<RefCell<Tree>> = Rc::new(RefCell::new(tree));
     
-    unsafe {traverse_lines(&lines, tree_ref.as_ptr())};
     unsafe {
+        traverse_lines(&lines, tree_ref.as_ptr());
+            
         let dirs = (*tree_ref.as_ptr()).get_dirs();
         
         let small_dirs = dirs.iter().filter(|&&dir| (*dir).size <= 100000).collect::<Vec<_>>();
